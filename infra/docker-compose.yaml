@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass islamghany
+    volumes:
+      - ./data:/data
+    networks:
+      jobs-net:
+
+
+  server:
+    build:
+      context: ./../server
+      dockerfile: ./../server/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - PORT=8080
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=islamghany
+    networks:
+      jobs-net:
+
+
+  client:
+    build:
+      context: ./../client
+      dockerfile: ./../client/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    environment:
+      - VITE_API_URL=http://server:8080
+      - PORT=3000
+    networks:
+      jobs-net:
+
+
+networks:
+  jobs-net:

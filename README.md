@@ -9,13 +9,13 @@ Spin up a job that will resolve after a random amount of time.
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone git@github.com:islamghany/job-exec.git
 ```
 
 ### 2. Go to the project directory infra
 
 ```bash
-cd <project-directory>/infra
+cd job-exec/infra
 ```
 
 ### 3. Start the app
@@ -41,3 +41,34 @@ docker-compose up
 The frontend app will be available at http://localhost:3000
 
 And the backend app will be available at http://localhost:8080
+
+## 5. Stop the app
+
+If you have Make installed, you can stop the app by running the following command:
+
+```bash
+make down
+```
+
+or you can run the following command to stop the app using docker-compose:
+
+```bash
+docker compose down
+```
+
+## if you want run the app in detached mode and show logs
+
+If you have Make installed, you can start the app in detached mode and show logs by running the following command:
+
+```bash
+make up-detached
+make logs
+
+```
+
+or you can run the following command to start the app in detached mode and show logs using docker-compose:
+
+```bash
+docker compose up -d
+docker compose -p infra logs -f
+```

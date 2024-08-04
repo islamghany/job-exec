@@ -5,6 +5,18 @@ up:
 	docker compose up 
 	@echo "Docker images started!"
 
+## up-deattached: starts all containers in the background without forcing build
+up-deattached:
+	@echo "Starting Docker images..."
+	docker compose up -d
+	@echo "Docker images started!"
+
+## logs: shows logs of all containers
+logs:
+	@echo "Showing logs of all containers..."
+	docker compose -p infra logs -f
+	@echo "Done!"
+
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
 up_build:
 	@echo "Stopping docker images (if running...)"
